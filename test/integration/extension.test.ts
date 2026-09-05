@@ -67,8 +67,8 @@ suite("Stack extension integration", () => {
     assert.deepEqual(api.getServerStatus(), {
       state: "running",
       executable: cliPath,
-      version: "0.4.0",
-      detail: "Stack CLI 0.4.0 is providing language intelligence.",
+      version: process.env.STACK_TEST_CLI_VERSION ?? "0.5.0",
+      detail: `Stack CLI ${process.env.STACK_TEST_CLI_VERSION ?? "0.5.0"} is providing language intelligence.`,
     });
   });
 
@@ -165,7 +165,7 @@ suite("Stack extension integration", () => {
   });
 
   test("refuses older and unverified newer CLI versions", async () => {
-    for (const version of ["0.3.9", "0.5.0"]) {
+    for (const version of ["0.3.9", "0.6.0"]) {
       const executable = await createVersionFixture(version);
       await vscode.workspace
         .getConfiguration("stack")
@@ -179,7 +179,7 @@ suite("Stack extension integration", () => {
         state: "incompatible",
         executable,
         version,
-        detail: `Stack CLI ${version} is outside the supported range >=0.4.0 <0.5.0.`,
+        detail: `Stack CLI ${version} is outside the supported range >=0.4.0 <0.6.0.`,
       });
     }
 

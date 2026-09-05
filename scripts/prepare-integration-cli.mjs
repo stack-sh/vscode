@@ -7,35 +7,35 @@ import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
 const execFileAsync = promisify(execFile);
-const VERSION = "0.4.0";
+const VERSION = "0.5.0";
 const RELEASE_BASE = `https://github.com/stack-sh/cli/releases/download/v${VERSION}`;
 const TARGETS = new Map([
   [
     "darwin:arm64",
     [
       "aarch64-apple-darwin",
-      "dd43cf3d966a3dc28de3ac8752b6a98f19e4cb7cf6b04652ab73a013800cb015",
+      "cfa5e6459481dec73c0aca5b32d52293c977a4f5d72273f8ea9ce71c4f689ea2",
     ],
   ],
   [
     "darwin:x64",
     [
       "x86_64-apple-darwin",
-      "48a72328fcf6d160a123a766d9701108f8ee9f633001581dab533b93dddf0827",
+      "d38e017c93a41855319fd583c4f0d6e62dc688b10ebeedbe925d07ba6dbb7e2b",
     ],
   ],
   [
     "linux:arm64",
     [
       "aarch64-unknown-linux-gnu",
-      "a0d76bfa9ed9e767fcd06dbeb7140234db865440210c7c3abf6c3db4f6983a6e",
+      "506a03d1b430497539bfc2c57ff4a97962a983d1343c983700bc85719e5740cb",
     ],
   ],
   [
     "linux:x64",
     [
       "x86_64-unknown-linux-gnu",
-      "89d8a34c0da5f67932edff2641fe0a0527afbd120cfd5133cb38cdeffca55319",
+      "b159e58c899f77798196616dd1a33fc6a04026cdc582861ee8ac257211abdb9d",
     ],
   ],
 ]);
@@ -45,7 +45,7 @@ export async function prepareIntegrationCli() {
   const release = TARGETS.get(platformKey);
   if (release === undefined) {
     throw new Error(
-      `Stack CLI 0.4.0 has no supported integration target for ${platformKey}`,
+      `Stack CLI 0.5.0 has no supported integration target for ${platformKey}`,
     );
   }
 

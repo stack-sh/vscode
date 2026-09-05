@@ -1,7 +1,7 @@
 import semver from "semver";
 
 export const MINIMUM_STACK_CLI_VERSION = "0.4.0";
-export const SUPPORTED_STACK_CLI_RANGE = ">=0.4.0 <0.5.0";
+export const SUPPORTED_STACK_CLI_RANGE = ">=0.4.0 <0.6.0";
 
 export type CliCompatibility =
   | { kind: "compatible"; version: string }
