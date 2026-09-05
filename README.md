@@ -7,7 +7,7 @@ The extension associates `.stack` files with Stack, provides the canonical TextM
 ## Requirements
 
 - Visual Studio Code 1.91 or newer.
-- Stack CLI `>=0.4.0 <0.5.0` installed in the environment where the workspace extension host runs.
+- Stack CLI `>=0.4.0 <0.6.0` installed in the environment where the workspace extension host runs.
 - A trusted workspace. Syntax highlighting remains declarative, but the language server does not start in Restricted Mode because it launches a native executable.
 
 Install the CLI with Homebrew:
@@ -37,7 +37,7 @@ The Playground command opens <https://stack-diagram.com/> in your browser. It do
 
 | Extension | VS Code    | Stack CLI        | Language assets              |
 | --------- | ---------- | ---------------- | ---------------------------- |
-| `0.1.x`   | `>=1.91.0` | `>=0.4.0 <0.5.0` | `@stack-sh/language` `0.1.0` |
+| `0.1.x`   | `>=1.91.0` | `>=0.4.0 <0.6.0` | `@stack-sh/language` `0.1.0` |
 
 Update the extension through Visual Studio Code. Update a Homebrew-managed CLI with `brew upgrade stack-sh/tap/stack`; use the owner of any other installation channel to update that installation. The extension refuses to start an older or unverified newer CLI and gives an action appropriate to the detected state.
 

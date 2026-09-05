@@ -17,8 +17,12 @@ void describe("Stack CLI compatibility", () => {
       kind: "compatible",
       version: "0.4.99",
     });
+    assert.deepEqual(assessCliVersion("stack 0.5.0"), {
+      kind: "compatible",
+      version: "0.5.0",
+    });
     assert.equal(MINIMUM_STACK_CLI_VERSION, "0.4.0");
-    assert.equal(SUPPORTED_STACK_CLI_RANGE, ">=0.4.0 <0.5.0");
+    assert.equal(SUPPORTED_STACK_CLI_RANGE, ">=0.4.0 <0.6.0");
   });
 
   void it("distinguishes older and unverified newer CLIs", () => {
@@ -26,9 +30,9 @@ void describe("Stack CLI compatibility", () => {
       kind: "too-old",
       version: "0.3.9",
     });
-    assert.deepEqual(assessCliVersion("stack 0.5.0"), {
+    assert.deepEqual(assessCliVersion("stack 0.6.0"), {
       kind: "too-new",
-      version: "0.5.0",
+      version: "0.6.0",
     });
     assert.deepEqual(assessCliVersion("stack 1.0.0"), {
       kind: "too-new",

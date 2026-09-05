@@ -100,7 +100,7 @@ for (const key of [
 }
 
 assert.ok(
-  /^\| `0\.1\.x`\s+\| `>=1\.91\.0`\s+\| `>=0\.4\.0 <0\.5\.0`\s+\| `@stack-sh\/language` `0\.1\.0`\s+\|$/mu.test(
+  /^\| `0\.1\.x`\s+\| `>=1\.91\.0`\s+\| `>=0\.4\.0 <0\.6\.0`\s+\| `@stack-sh\/language` `0\.1\.0`\s+\|$/mu.test(
     readme,
   ),
   "README compatibility table is stale",
