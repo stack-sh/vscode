@@ -1,0 +1,164 @@
+{
+  "name": "stack-language",
+  "displayName": "Stack",
+  "description": "Syntax highlighting and native language intelligence for Stack architecture diagrams.",
+  "version": "0.1.0",
+  "publisher": "stack-sh",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stack-sh/vscode.git"
+  },
+  "homepage": "https://stack-diagram.com/",
+  "bugs": {
+    "url": "https://github.com/stack-sh/vscode/issues"
+  },
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Formatters"
+  ],
+  "keywords": [
+    "architecture",
+    "diagram",
+    "language server",
+    "stack"
+  ],
+  "galleryBanner": {
+    "color": "#111827",
+    "theme": "dark"
+  },
+  "main": "./dist/extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "onLanguage:stack"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "The Stack language server launches the configured native Stack CLI. Trust the workspace before enabling language intelligence."
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "The native Stack CLI requires a filesystem-backed extension host."
+    }
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "stack",
+        "aliases": [
+          "Stack",
+          "stack"
+        ],
+        "extensions": [
+          ".stack"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "stack",
+        "scopeName": "source.stack",
+        "path": "./syntaxes/stack.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "stack.restartLanguageServer",
+        "title": "Restart Language Server",
+        "category": "Stack"
+      },
+      {
+        "command": "stack.showLanguageServerOutput",
+        "title": "Show Language Server Output",
+        "category": "Stack"
+      },
+      {
+        "command": "stack.openPlayground",
+        "title": "Open Playground",
+        "category": "Stack",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "stack.openInstallationGuide",
+        "title": "Open CLI Installation Guide",
+        "category": "Stack"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "stack.openPlayground",
+          "when": "editorLangId == stack",
+          "group": "navigation@10"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Stack",
+      "properties": {
+        "stack.server.path": {
+          "type": "string",
+          "default": "stack",
+          "scope": "machine",
+          "description": "Executable path or command name for the Stack CLI. The extension runs it with the fixed `lsp` argument."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "sync:language": "node scripts/sync-language-assets.mjs",
+    "check:language": "node scripts/sync-language-assets.mjs --check",
+    "check:types": "tsc --noEmit -p tsconfig.json",
+    "compile": "npm run sync:language && npm run check:types && node esbuild.mjs",
+    "package": "npm run sync:language && npm run check:types && node esbuild.mjs --production",
+    "vscode:prepublish": "npm run package",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "test:unit": "tsc -p tsconfig.test.json && node --test out-test/test/unit/*.test.js",
+    "test:integration:prepare": "node scripts/prepare-integration-cli.mjs",
+    "test:integration:run": "npm run package:check && node scripts/prepare-vsix-test.mjs && tsc -p tsconfig.test.json && vscode-test",
+    "test:integration": "node scripts/run-integration-tests.mjs",
+    "test": "npm run test:unit",
+    "validate:manifest": "node scripts/validate-manifest.mjs",
+    "check": "npm run clean && npm run format:check && npm run lint && npm run check:types && npm run test:unit && npm run package && npm run check:language && npm run validate:manifest",
+    "package:vsix": "node scripts/package-vsix.mjs",
+    "package:check": "node scripts/check-vsix.mjs",
+    "audit": "npm audit --audit-level=high"
+  },
+  "dependencies": {
+    "@stack-sh/language": "0.1.0",
+    "semver": "7.8.5",
+    "vscode-languageclient": "10.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/mocha": "10.0.10",
+    "@types/node": "20.19.43",
+    "@types/semver": "7.8.0",
+    "@types/vscode": "1.91.0",
+    "@vscode/test-cli": "0.0.15",
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "3.9.3-11",
+    "esbuild": "0.28.2",
+    "eslint": "10.10.0",
+    "globals": "17.12.0",
+    "mocha": "12.0.0",
+    "prettier": "3.9.6",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.69.0"
+  },
+  "overrides": {
+    "diff": "9.0.0",
+    "serialize-javascript": "7.1.1"
+  }
+}
