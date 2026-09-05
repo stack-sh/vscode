@@ -50,6 +50,6 @@ npm run test:integration
 npm run package:check
 ```
 
-Integration tests download the pinned Stack CLI 0.4.0 release archive for the current supported platform, verify its SHA-256 digest, and run the inspected VSIX contents in clean VS Code 1.91.0 and current stable Extension Development Hosts against the real language server.
+Integration tests download the pinned Stack CLI 0.5.0 release archive for the current supported platform, verify its SHA-256 digest, and run the inspected VSIX contents in clean VS Code 1.91.0 and current stable Extension Development Hosts against the real language server.
 
 See [Releasing](./docs/releasing.md), [Privacy](./PRIVACY.md), [Security](./SECURITY.md), [Support](./SUPPORT.md), and [Third-party notices](./THIRD_PARTY_NOTICES.md).

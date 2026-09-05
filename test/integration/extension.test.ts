@@ -67,8 +67,8 @@ suite("Stack extension integration", () => {
     assert.deepEqual(api.getServerStatus(), {
       state: "running",
       executable: cliPath,
-      version: process.env.STACK_TEST_CLI_VERSION ?? "0.4.0",
-      detail: `Stack CLI ${process.env.STACK_TEST_CLI_VERSION ?? "0.4.0"} is providing language intelligence.`,
+      version: process.env.STACK_TEST_CLI_VERSION ?? "0.5.0",
+      detail: `Stack CLI ${process.env.STACK_TEST_CLI_VERSION ?? "0.5.0"} is providing language intelligence.`,
     });
   });
 
