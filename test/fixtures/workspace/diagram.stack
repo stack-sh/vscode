@@ -1,0 +1,16 @@
+stack 1.0
+
+diagram "Extension smoke" {
+  node api "Public API" {
+    kind service
+    icon "gateway"
+  }
+
+  node database "Primary database" {
+    kind database
+  }
+
+  edge api -> database "SQL" {
+    kind data
+  }
+}

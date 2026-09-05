@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: visual-studio-marketplace
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Verify release tag
+        id: metadata
+        run: node scripts/release-metadata.mjs
+      - name: Run static and unit gates
+        run: npm run check
+      - name: Audit production dependencies
+        run: npm run audit
+      - name: Build, inspect, and test the release VSIX
+        run: xvfb-run -a npm run test:integration
+      - name: Create checksum
+        run: >-
+          node scripts/create-checksum.mjs
+          "${{ steps.metadata.outputs.vsix_path }}"
+          "${{ steps.metadata.outputs.checksum_path }}"
+      - name: Attest the release VSIX
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-path: ${{ steps.metadata.outputs.vsix_path }}
+      - name: Publish to Visual Studio Marketplace
+        run: >-
+          npx vsce publish --oidc --skip-duplicate --packagePath
+          "${{ steps.metadata.outputs.vsix_path }}"
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "$GITHUB_REF_NAME"
+          "${{ steps.metadata.outputs.vsix_path }}"
+          "${{ steps.metadata.outputs.checksum_path }}"
+          --verify-tag
+          --title "Stack ${{ steps.metadata.outputs.version }}"
+          --notes-from-tag
