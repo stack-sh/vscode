@@ -19,7 +19,7 @@ npm run package:check
 npm run audit
 ```
 
-Integration tests support Apple Silicon and Intel macOS plus arm64 and x86_64 glibc Linux. They download the public Stack CLI 0.4.0 archive for the host, verify its fixed SHA-256 digest, package and inspect the VSIX, and run its extracted contents in VS Code 1.91.0 and current stable with isolated user-data directories.
+Integration tests support Apple Silicon and Intel macOS plus arm64 and x86_64 glibc Linux. They download the public Stack CLI 0.5.0 archive for the host, verify its fixed SHA-256 digest, package and inspect the VSIX, and run its extracted contents in VS Code 1.91.0 and current stable with isolated user-data directories.
 
 ## Ownership boundaries
 

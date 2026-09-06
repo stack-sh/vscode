@@ -4,6 +4,20 @@ Official Visual Studio Code language support for the [Stack architecture diagram
 
 The extension associates `.stack` files with Stack, provides the canonical TextMate syntax and editor configuration, and launches the native `stack lsp` process for diagnostics, completion, hover, document symbols, and formatting.
 
+## Distribution status
+
+The extension is not yet published to Visual Studio Marketplace, Open VSX, or GitHub Releases. The current repository is usable for development and local evaluation through a packaged VSIX; there is no public automatic-update channel yet.
+
+To build and install the current source locally:
+
+```sh
+npm ci
+npm run package:vsix
+code --install-extension artifacts/stack-language-0.1.0.vsix
+```
+
+Rebuild and reinstall the VSIX to update a local evaluation copy.
+
 ## Requirements
 
 - Visual Studio Code 1.91 or newer.
@@ -39,7 +53,7 @@ The Playground command opens <https://stack-diagram.com/> in your browser. It do
 | --------- | ---------- | ---------------- | ---------------------------- |
 | `0.1.x`   | `>=1.91.0` | `>=0.4.0 <0.6.0` | `@stack-sh/language` `0.1.0` |
 
-Update the extension through Visual Studio Code. Update a Homebrew-managed CLI with `brew upgrade stack-sh/tap/stack`; use the owner of any other installation channel to update that installation. The extension refuses to start an older or unverified newer CLI and gives an action appropriate to the detected state.
+The compatibility table describes the current source and locally packaged VSIX. Update a Homebrew-managed CLI with `brew upgrade stack-sh/tap/stack`; use the owner of any other installation channel to update that installation. The extension refuses to start an older or unverified newer CLI and gives an action appropriate to the detected state.
 
 ## Development
 
