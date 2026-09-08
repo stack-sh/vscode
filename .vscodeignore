@@ -4,6 +4,7 @@
 .vscode-test/**
 .vscode-test.mjs
 .gitignore
+AGENTS.md
 docs/**
 node_modules/**
 out-test/**
